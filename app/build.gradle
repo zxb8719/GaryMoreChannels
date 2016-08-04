@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "gary.com.garymorechannels"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    //多渠道打包设置，在AndroidManifestwen获取
+    /*1、变量名为：GRADLE_HOME，变量值就为gradle的根目录；
+    所以变量值为：C:\Users\yazhou\.gradle\wrapper\dists\gradle-2.1-all\27drb4udbjf4k88eh2ffdc0n55\gradle-2.1
+    2、系统变量里PATH里面添加gradle的bin目录
+    我的就是C:\Users\yazhou\.gradle\wrapper\dists\gradle-2.1-all\27drb4udbjf4k88eh2ffdc0n55\gradle-2.1\bin
+    productFlavors
+    3、在Terminal中敲下 gradle assembleRelease就可以一次性生成所有的渠道包了
+    4、所有生成的apk在项目的build\outputs\apk下。
+    */
+    productFlavors{
+       // internal {}
+        baidu {}
+        c360 {}
+        uc {}
+        productFlavors.all{flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]  }
+    }
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile project(':mlog')
+}

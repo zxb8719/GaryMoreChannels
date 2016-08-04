@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         MLog.i("测试MLog框架！！！");
-
+        MLog.i("测试MLog框架！！！");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
